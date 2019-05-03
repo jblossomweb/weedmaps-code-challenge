@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import palette from '../palette';
 
 export const AppHeader = styled.div`
   height: 70px;
@@ -6,8 +7,8 @@ export const AppHeader = styled.div`
   padding: 0 20px;
   justify-content: space-between;
   align-items: center;
-  background-color: #222;
-  color: #fff;
+  background-color: ${palette.black};
+  color: ${palette.white};
 
   img {
     width: 110px;
@@ -39,12 +40,12 @@ export const HeroSection = styled.div`
   justify-content: center;
   width: 100%;
   height: auto;
-  border-bottom: 1px solid #e5e4e4;
+  border-bottom: 1px solid ${palette.gray1};
   padding: 0 0 16px;
 
   h2 {
     font-weight: 300;
-    color: #a4a2a2;
+    color: ${palette.gray2};
     display: flex;
     align-items: center;
     span {
@@ -72,7 +73,7 @@ export const TextContent = styled.div`
   max-width: 1100px;
   height: auto;
   text-align: left;
-  color: #a4a2a2;
+  color: ${palette.gray2};
   line-height: 25px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -85,8 +86,8 @@ export const LocateButton = styled.a`
   display: flex;
   align-items: center;
   justify-content: start;
-  border: 1px solid #c2baba;
-  color: #7e7979;
+  border: 1px solid ${palette.gray3};
+  color: ${palette.gray4};
   border-radius: 3px;
   padding: 5px;
   font-size: 12px;
