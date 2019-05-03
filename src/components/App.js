@@ -28,7 +28,8 @@ const regionLabels = {
 
 export class App extends Component {
   constructor(props) {
-    super();
+    super(props);
+    this.locateMe = this.locateMe.bind(this);
     this.state = {
       loadingTimer: 0,
     };

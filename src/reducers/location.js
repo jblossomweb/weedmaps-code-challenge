@@ -9,10 +9,10 @@ const locationListing = (state = { isLocating: false, location: null, regions: n
       };
     case RECEIVE:
       return {
+        ...state,
         isLocating: false,
         location: action.location,
         regions: action.regions,
-        ...state,
       };
     case ERROR:
       return {
