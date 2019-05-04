@@ -19,23 +19,27 @@ export const AppHeader = styled.div`
 export const AppWrapper = styled.div`
   margin-bottom: 20px;
   text-align: center;
+  font-family: proxima-nova, Helvetica, Roboto, Arial, sans-serif;
+  background: ${palette.gray1};
 `;
 
 export const AppContent = styled.div`
   width: 90%;
-  max-width: 1200px;
+  max-width: 760px;
   margin: 10px auto;
 `;
 
 export const ListingGroups = styled.div`
   margin-top: 30px;
+  width: 100%;
   h2 {
     text-align: left;
+    color: ${palette.gray4};
   }
 `;
 
 export const HeroSection = styled.div`
-  background-color: white;
+  background-color: ${palette.white};
   display: flex;
   justify-content: center;
   width: 100%;
@@ -91,10 +95,11 @@ export const LocateButton = styled.a`
   border-radius: 3px;
   padding: 5px;
   font-size: 12px;
+  font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
 
   svg {
-    margin-right: 5px;
+    margin-right: 10px;
   }
 `;

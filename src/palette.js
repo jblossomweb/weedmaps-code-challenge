@@ -1,8 +1,10 @@
 export default {
   black: `#222`,
   white: `#fff`,
-  gray1: `#e5e4e4`,
+  teal: `#00ccbc`,
+  gray1: `#f2f5f5`,
   gray2: `#a4a2a2`,
   gray3: `#c2baba`,
-  gray4: `#7e7979`,
+  gray4: `#666666`,
+  shadow: `rgba(0, 0, 0, 0.3)`,
 }

@@ -2,20 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import ListingCard from "../listing_card";
 
-const ListingCards = ({ listings }) => (
+const ListingCards = ({ location, listings }) => (
   <React.Fragment>
     {listings.map(listing => (
-      <ListingCard listing={listing} key={listing.id} />
+      <ListingCard location={location} listing={listing} key={listing.id} />
     ))}
   </React.Fragment>
 );
 
 ListingCards.propTypes = {
-  listings: PropTypes.array
+  location: PropTypes.object,
+  listings: PropTypes.array,
 };
 
 ListingCards.defaultProps = {
-  listings: []
+  location: null,
+  listings: [],
 };
 
 export default ListingCards;

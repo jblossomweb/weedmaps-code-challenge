@@ -33,9 +33,9 @@ const regionLabels = {
   doctor: 'Doctors',
 };
 const regionIcons = {
-  delivery: <Delivery fill={palette.black} />,
-  dispensary: <Dispensary fill={palette.black} />,
-  doctor: <Doctor fill={palette.black} />,
+  delivery: <Delivery fill={palette.gray4} />,
+  dispensary: <Dispensary fill={palette.gray4} />,
+  doctor: <Doctor fill={palette.gray4} />,
 };
 
 export class App extends Component {
@@ -89,7 +89,10 @@ export class App extends Component {
               </LocateButton>
             </LocationSection>
             <TextContent>
-              {location && location.quote ? location.quote : `Click the 'Locate Me' button above`}
+              <h4>{location && location.quote ? location.quote : `Click the 'Locate Me' button above.`}</h4>
+              Lorem Ipsum dolor sit amet, consectetur adispiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aligqua.<br />
+              Ut enim ad minim veniam, quis.
             </TextContent>
           </ContentContainer>
         </HeroSection>
@@ -103,6 +106,7 @@ export class App extends Component {
                   {this.getLabel(regions[regionType], regionLabels[regionType], regionIcons[regionType])}
                   </h2>
                   <ListingCards
+                    location={location}
                     listings={get(regions[regionType], 'listings')}
                   />
                 </ListingGroups>
