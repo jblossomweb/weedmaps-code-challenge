@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import get from 'lodash.get';
-import { locate } from '../actions';
+import { locate } from '../store/actions';
 import logo from '../assets/logo.png';
 import ListingCards from './listing_cards';
 

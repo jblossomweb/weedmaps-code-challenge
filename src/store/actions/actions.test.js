@@ -3,10 +3,10 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import 'isomorphic-fetch';
 import * as actions from '.';
-import * as types from '../constants/ActionTypes';
-import * as config from '../constants/config';
-import mockResponse from '../__test__/mocks/location-mock.json';
-import defaultTestCoords from '../__test__/mocks/coord-mock.json';
+import * as types from '../../constants/ActionTypes';
+import * as config from '../../constants/config';
+import mockResponse from '../../__test__/mocks/location-mock.json';
+import defaultTestCoords from '../../__test__/mocks/coord-mock.json';
 
 const mockStore = configureMockStore([thunk]);
 describe('actions', () => {
@@ -21,7 +21,7 @@ describe('actions', () => {
     });
   });
 
-  describe('recieve', () => {
+  describe('receive', () => {
     it('should create action for receiving locations', () => {
       const testAction = {
         type: types.RECEIVE,

@@ -1,5 +1,5 @@
-import * as types from '../constants/ActionTypes';
-import * as config from '../constants/config';
+import * as types from '../../constants/ActionTypes';
+import * as config from '../../constants/config';
 
 export const requestLocation = coords => ({
   type: types.REQUEST,

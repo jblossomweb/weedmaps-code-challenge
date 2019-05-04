@@ -1,4 +1,4 @@
-import { REQUEST, RECEIVE, ERROR } from '../constants/ActionTypes';
+import { REQUEST, RECEIVE, ERROR } from '../../constants/ActionTypes';
 
 const locationListing = (state = { isLocating: false, location: null, regions: null }, action) => {
   switch (action.type) {
