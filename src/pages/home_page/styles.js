@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import palette from '../constants/palette';
-import pixels from '../constants/pixels';
+import palette from '../../constants/palette';
+import pixels from '../../constants/pixels';
 
-export const AppWrapper = styled.div`
+export const Wrapper = styled.div`
   margin-top: ${pixels.headerHeight}px;
   margin-bottom: 20px;
   text-align: center;
@@ -11,7 +11,7 @@ export const AppWrapper = styled.div`
   animation: fadein .5s;
 `;
 
-export const AppContent = styled.div`
+export const Content = styled.div`
   width: 90%;
   max-width: 760px;
   margin: 10px auto;

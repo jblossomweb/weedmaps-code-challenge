@@ -1,38 +1,31 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createGlobalStyle } from 'styled-components';
-import App from './components/App';
-import configureStore from './store/configureStore';
-import palette from './constants/palette';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    min-width: 320px;
-    font-family: sans-serif;
-    overflow-y: scroll;
-    background: ${palette.gray1};
-  }
-  @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes growY {
-    from { transform: scaleY(0) }
-    to   { transform: scaleY(1) }
-  }
-`;
+import configureStore from './store/configureStore';
+import HomePage from './pages/home_page';
+import AppHeader from './components/app_header';
+
+import { GlobalStyle } from './styles';
 
 const cacheStore = window.localStorage.getItem('store') || {};
 const store = configureStore(cacheStore);
+const history = createBrowserHistory();
 
 render(
   <Provider store={store}>
     <React.Fragment>
       <GlobalStyle />
-      <App />
+      <ConnectedRouter history={history}>
+        <AppHeader />
+        <Switch>
+          <Route exact={true} key={'home'} path={'/home'} component={HomePage} />
+          <Redirect to={`/home`} />
+        </Switch>
+      </ConnectedRouter>
     </React.Fragment>
   </Provider>,
   document.getElementById('root'),
