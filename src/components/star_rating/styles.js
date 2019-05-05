@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import palette from '../../palette';
+import palette from '../../constants/palette';
 
 export const Wrapper = styled.div`
   min-height: 30px;

@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import 'isomorphic-fetch';
 import * as actions from '.';
-import * as types from '../../constants/ActionTypes';
+import * as types from '../../constants/actionTypes';
 import * as config from '../../constants/config';
 import mockResponse from '../../__test__/mocks/location-mock.json';
 import defaultTestCoords from '../../__test__/mocks/coord-mock.json';
@@ -13,7 +13,7 @@ describe('actions', () => {
   describe('request', () => {
     it('should create action for requesting locations', () => {
       const testAction = {
-        type: types.REQUEST,
+        type: types.REQUEST_WEEDMAPS_LISTINGS,
         coords: mockResponse,
       };
 
@@ -24,7 +24,7 @@ describe('actions', () => {
   describe('receive', () => {
     it('should create action for receiving locations', () => {
       const testAction = {
-        type: types.RECEIVE,
+        type: types.RECEIVE_WEEDMAPS_LISTINGS,
         location: mockResponse.data.location,
         regions: mockResponse.data.regions,
       };
@@ -50,11 +50,11 @@ describe('actions', () => {
       store.dispatch(actions.locate(defaultTestCoords)).then(() => {
         expect(store.getActions()).toEqual([
           {
-            type: types.REQUEST,
+            type: types.REQUEST_WEEDMAPS_LISTINGS,
             coords: defaultTestCoords,
           },
           {
-            type: types.RECEIVE,
+            type: types.RECEIVE_WEEDMAPS_LISTINGS,
             location: mockResponse.data.location,
             regions: mockResponse.data.regions,
           },

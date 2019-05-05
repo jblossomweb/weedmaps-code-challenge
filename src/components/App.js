@@ -1,139 +1,92 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import get from 'lodash.get';
-import { locate } from '../store/actions';
-import logo from '../assets/logo.png';
-import ListingCards from './listing_cards';
 
-import Locate from '../icons/locate';
-import MapPin from '../icons/map-pin';
-import Delivery from '../icons/delivery';
-import Dispensary from '../icons/dispensary';
-import Doctor from '../icons/doctor';
+import * as geoSelectors from '../store/selectors/geo';
+import * as geoThunks from '../store/thunks/geo';
+
+import * as listingsSelectors from '../store/selectors/listings';
+import * as listingsThunks from '../store/thunks/listings';
+
+import AppHeader from './app_header';
+import HeroSection from './hero_section';
+import Listings from './listings';
 
 import {
-  AppHeader,
   AppWrapper,
   AppContent,
-  ListingGroups,
-  HeroSection,
-  ContentContainer,
-  LocationSection,
-  TextContent,
-  LocateButton,
 } from './styles';
-
-import palette from '../palette';
-
-const regionTypes = ['delivery', 'dispensary', 'doctor'];
-const regionLabels = {
-  delivery: 'Delivery Services',
-  dispensary: 'Dispensary Storefronts',
-  doctor: 'Doctors',
-};
-const regionIcons = {
-  delivery: <Delivery fill={palette.gray4} />,
-  dispensary: <Dispensary fill={palette.gray4} />,
-  doctor: <Doctor fill={palette.gray4} />,
-};
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.locateMe = this.locateMe.bind(this);
     this.state = {
       loadingTimer: 0,
     };
   }
 
-  locateMe() {
-    const { dispatch } = this.props;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        dispatch(locate(position.coords));
-      });
-    }
-  };
-
-  getLabel = (listings, label, icon) => {
-    if (get(listings, 'listings').length) {
-      return (
-        <div key={label}>
-          <strong> {icon} {label} </strong>
-        </div>
-      );
-    }
-    return <div />;
-  };
-
   render() {
-    const { isLocating, location, regions, error } = this.props;
+    const {
+      geoLocate, geoLocating, geoLocation, geoError,
+      fetchListings, fetchingListings, listingsLocation, listingsRegions, listingsError,
+    } = this.props;
+    // const thunking = geoLocating || fetchingListings;
+    const error = geoError || listingsError;
     return (
-      <AppWrapper>
-        <AppHeader>
-          <img src={logo} alt="weedmaps logo" />
-        </AppHeader>
-        <HeroSection>
-          <ContentContainer>
-            <LocationSection>
-              <h2>
-                <MapPin fill={palette.gray4} width={'60px'} height={'40px'} />
-                <span> {location ? location.name : ''} </span>
-                <span> {isLocating && !location ? '...locating' : ''} </span>
-              </h2>
-              <LocateButton onClick={this.locateMe}>
-                <Locate fill={palette.gray4} />
-                <span> Locate Me </span>
-              </LocateButton>
-            </LocationSection>
-            <TextContent>
-              <h4>{location && location.quote ? location.quote : `Click the 'Locate Me' button above.`}</h4>
-              Lorem Ipsum dolor sit amet, consectetur adispiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aligqua.<br />
-              Ut enim ad minim veniam, quis.
-            </TextContent>
-          </ContentContainer>
-        </HeroSection>
-        <AppContent>
-          {error && <div> {error.message} </div>}
-          {regions && (
-            <React.Fragment>
-              {regionTypes.map(regionType => (
-                <ListingGroups key={regionType}>
-                  <h2>
-                  {this.getLabel(regions[regionType], regionLabels[regionType], regionIcons[regionType])}
-                  </h2>
-                  <ListingCards
-                    location={location}
-                    listings={get(regions[regionType], 'listings')}
-                  />
-                </ListingGroups>
-              ))}
-            </React.Fragment>
-          )}
-        </AppContent>
-      </AppWrapper>
+      <React.Fragment>
+        <AppHeader />
+        <AppWrapper>
+          <HeroSection
+            geoLocate={geoLocate}
+            geoLocating={geoLocating}
+            geoLocation={geoLocation}
+            fetchListings={fetchListings}
+            fetchingListings={fetchingListings}
+            listingsLocation={listingsLocation}
+          />
+          <AppContent>
+            {error && <div> {error.message} </div>}
+            {listingsLocation && listingsRegions && (
+              <Listings
+                location={listingsLocation}
+                regions={listingsRegions}
+              />
+            ) }
+          </AppContent>
+        </AppWrapper>
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => state.location;
+const mapStateToProps = state => ({
+  geoLocating: geoSelectors.getLocating(state),
+  geoLocation: geoSelectors.getLocation(state),
+  geoError: geoSelectors.getError(state),
+  fetchingListings: listingsSelectors.getFetching(state),
+  listingsLocation: listingsSelectors.getLocation(state),
+  listingsRegions: listingsSelectors.getRegions(state),
+  listingsError: listingsSelectors.getError(state),
+});
 
-App.propTypes = {
-  isLocating: PropTypes.bool.isRequired,
-  location: PropTypes.object,
-  regions: PropTypes.object,
-  dispatch: PropTypes.any,
-  error: PropTypes.object,
-};
+const mapDispatchToProps = dispatch => ({
+  geoLocate: () => geoThunks.fetchCoordinates()(dispatch),
+  fetchListings: coords => listingsThunks.fetchListings(coords)(dispatch),
+});
 
-App.defaultProps = {
-  isLocating: false,
-  location: {},
-  regions: {},
-  error: {},
-};
+// App.propTypes = {
+//   fetchingLocations: PropTypes.bool.isRequired,
+//   location: PropTypes.object,
+//   regions: PropTypes.object,
+//   dispatch: PropTypes.any, // TODO: fix this.
+//   error: PropTypes.object,
+// };
 
-export default connect(mapStateToProps)(App);
+// App.defaultProps = {
+//   fetchingLocations: false,
+//   location: {},
+//   regions: {},
+//   error: {},
+// };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

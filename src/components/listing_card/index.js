@@ -5,7 +5,7 @@ import get from "lodash.get";
 import Avatar from "../avatar";
 import StarRating from "../star_rating";
 
-import palette from '../../palette';
+import palette from '../../constants/palette';
 
 const CardWrapper = styled.div`
   min-height: 70px;

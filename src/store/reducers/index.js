@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import location from './location';
+
+import geo from './geo';
+import listings from './listings';
 
 const rootReducer = combineReducers({
-  location
+  geo,
+  listings,
 });
 
 export default rootReducer;
