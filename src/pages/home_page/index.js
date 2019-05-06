@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as geoSelectors from '../../store/selectors/geo';
@@ -7,7 +8,34 @@ import * as listingsThunks from '../../store/thunks/listings';
 
 import HomePage from './HomePage';
 
-const mapStateToProps = state => ({
+class Container extends HomePage {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.geoLocating || nextProps.fetchingListings) {
+      return;
+    }
+    const { geoLocation, fetchListings } = this.props;
+    if (
+      (!geoLocation && nextProps.geoLocation) ||
+      (
+        geoLocation &&
+        nextProps.geoLocation &&
+        (
+          nextProps.geoLocation.latitude !== geoLocation.latitude ||
+          nextProps.geoLocation.longitude !== geoLocation.longitude
+        )
+      )
+    ) {
+      fetchListings(nextProps.geoLocation);
+    }
+  }
+}
+
+Container.propTypes = {
+  ...HomePage.propTypes,
+  fetchListings: PropTypes.func.isRequired,
+};
+
+export const mapStateToProps = state => ({
   geoLocating: geoSelectors.getLocating(state),
   geoLocation: geoSelectors.getLocation(state),
   geoError: geoSelectors.getError(state),
@@ -17,9 +45,9 @@ const mapStateToProps = state => ({
   listingsError: listingsSelectors.getError(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   geoLocate: () => geoThunks.fetchCoordinates()(dispatch),
   fetchListings: coords => listingsThunks.fetchListings(coords)(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

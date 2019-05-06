@@ -36,6 +36,16 @@ const getRegionsSelector = state => get(
 export const getRegions = createSelector([getRegionsSelector], echo);
 
 /*
+ * getListingDetails
+ */
+const getListingDetailsSelector = (state, listingId) => get(
+  getScopedState(state),
+  listingsPaths.details(listingId),
+  null,
+);
+export const getListingDetails = createSelector([getListingDetailsSelector], echo);
+
+/*
  * getError
  */
 const getErrorSelector = state => get(

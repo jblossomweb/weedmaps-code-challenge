@@ -6,7 +6,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 
 import configureStore from './store/configureStore';
+
 import HomePage from './pages/home_page';
+import ListingDetailsPage from './pages/listing_details_page';
+
 import AppHeader from './components/app_header';
 
 import { GlobalStyle } from './styles';
@@ -23,6 +26,7 @@ render(
         <AppHeader />
         <Switch>
           <Route exact={true} key={'home'} path={'/home'} component={HomePage} />
+          <Route exact={true} key={'listing'} path={'/listing/:id'} component={ListingDetailsPage} />
           <Redirect to={`/home`} />
         </Switch>
       </ConnectedRouter>

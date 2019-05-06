@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import HeroSection from '../../components/hero_section';
@@ -9,11 +9,11 @@ import {
   Content,
 } from './styles';
 
-class HomePage extends Component {
+class HomePage extends React.Component {
   render() {
     const {
       geoLocate, geoLocating, geoLocation, geoError,
-      fetchListings, fetchingListings, listingsLocation, listingsRegions, listingsError,
+      fetchingListings, listingsLocation, listingsRegions, listingsError,
     } = this.props;
     const error = geoError || listingsError;
     return (
@@ -23,7 +23,6 @@ class HomePage extends Component {
             geoLocate={geoLocate}
             geoLocating={geoLocating}
             geoLocation={geoLocation}
-            fetchListings={fetchListings}
             fetchingListings={fetchingListings}
             listingsLocation={listingsLocation}
           />

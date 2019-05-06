@@ -16,26 +16,6 @@ import {
 
 class HeroSection extends React.Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.geoLocating || nextProps.fetchingListings) {
-      return;
-    }
-    const { geoLocation, fetchListings } = this.props;
-    if (
-      (!geoLocation && nextProps.geoLocation) ||
-      (
-        geoLocation &&
-        nextProps.geoLocation &&
-        (
-          nextProps.geoLocation.latitude !== geoLocation.latitude ||
-          nextProps.geoLocation.longitude !== geoLocation.longitude
-        )
-      )
-    ) {
-      fetchListings(nextProps.geoLocation);
-    }
-  }
-
   getTitle = () => {
     const { geoLocating, fetchingListings, listingsLocation } = this.props;
     if (geoLocating) {
@@ -100,7 +80,6 @@ HeroSection.propTypes = {
   geoLocate: PropTypes.func.isRequired,
   geoLocating: PropTypes.bool,
   geoLocation: PropTypes.object,
-  fetchListings: PropTypes.func.isRequired,
   fetchingListings: PropTypes.bool,
   listingsLocation: PropTypes.object,
 }

@@ -15,10 +15,32 @@ export const receiveListingsAction = response => ({
   },
 });
 
-export const requestListingsErrorAction = e => ({
+export const requestListingsErrorAction = error => ({
   type: types.REQUEST_WEEDMAPS_LISTINGS_ERROR,
   payload: {
-    error: e,
+    error,
+    message: 'Oops something went wrong',
+  },
+});
+
+export const requestListingDetailsAction = id => ({
+  type: types.REQUEST_WEEDMAPS_LISTING_DETAILS,
+  payload: {
+    id,
+  },
+});
+
+export const receiveListingDetailsAction = response => ({
+  type: types.RECEIVE_WEEDMAPS_LISTING_DETAILS,
+  payload: {
+    listing: response.data.listing,
+  },
+});
+
+export const requestListingDetailsErrorAction = error => ({
+  type: types.REQUEST_WEEDMAPS_LISTING_DETAILS_ERROR,
+  payload: {
+    error,
     message: 'Oops something went wrong',
   },
 });
