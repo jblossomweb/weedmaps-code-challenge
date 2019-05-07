@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     min-width: 320px;
-    font-family: sans-serif;
+    font-family: proxima-nova, Helvetica, Roboto, Arial, sans-serif;
     overflow-y: scroll;
     background: ${palette.gray1};
   }

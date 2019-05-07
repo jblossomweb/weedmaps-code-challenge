@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 
-import ListingCards from '../listing_cards';
+import ListingCard from '../listing_card';
 
 import Delivery from '../../icons/delivery';
 import Dispensary from '../../icons/dispensary';
@@ -54,10 +54,9 @@ class Listings extends React.Component {
                 regionIcons[regionType],
               )}
             </h2>
-            <ListingCards
-              location={location}
-              listings={get(regions[regionType], 'listings')}
-            />
+            {get(regions[regionType], 'listings').map(listing => (
+              <ListingCard location={location} listing={listing} key={listing.id} />
+            ))}
           </ListingGroups>
         ))}
       </React.Fragment>

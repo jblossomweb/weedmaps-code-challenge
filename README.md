@@ -25,11 +25,12 @@
 * Your browser should automatically open at `http://localhost:3000` and will reload on subsequent file changes
 
 #### Available Scripts
-| Command       | Description                   |
-| ------------- | ----------------------------- |
-| `yarn start`  | Starts the development server |
-| `yarn test`   | Starts the test runner        |
-| `yarn eslint` | Runs ESLint                   |
+| Command          | Description                   |
+| ---------------- | ----------------------------- |
+| `yarn start`     | Starts the development server |
+| `yarn test`      | Starts the test runner        |
+| `yarn eslint`    | Runs ESLint                   |
+| `yarn storybook` | Starts storybook              |
 
 ## Challenge Requirements
 There are four parts that should be completed for this code challenge: [UI Styling](#part-1-ui-styling), [Debugging](#part-2-debugging), [Logic](#part-3-logic), and [Testing](#part-4-testing). Each of the areas are documented in more detail below. They are of equal importance and should be completed to the best of your ability. For example, building a beautiful UI is appreciated but it should also be supported by a solid test suite.
