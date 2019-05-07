@@ -1,21 +1,6 @@
 import clone from 'lodash.clonedeep';
 import set from 'lodash.set';
-
-import {
-  REQUEST_GEO_COORDS,
-  RECEIVE_GEO_COORDS,
-  REQUEST_GEO_COORDS_ERROR,
-} from '../../constants/actionTypes';
-
-import { geoPaths } from '../../constants/storePaths';
-
-export const getInitialState = () => {
-  const initialState = {};
-  set(initialState, geoPaths.locating(), false);
-  set(initialState, geoPaths.location(), null);
-  set(initialState, geoPaths.error(), null);
-  return initialState;
-};
+import { geoPaths } from '../../../constants/storePaths';
 
 /*
  * REQUEST_GEO_COORDS
@@ -46,13 +31,4 @@ export const requestGeoCoordsErrorReducer = (state, action) => {
   set(newState, geoPaths.locating(), false);
   set(newState, geoPaths.error(), error);
   return newState;
-};
-
-export default (state = getInitialState(), action) => {
-  switch (action.type) {
-    case REQUEST_GEO_COORDS: return requestGeoCoordsReducer(state, action);
-    case RECEIVE_GEO_COORDS: return receiveGeoCoordsReducer(state, action);
-    case REQUEST_GEO_COORDS_ERROR: return requestGeoCoordsErrorReducer(state, action);
-    default: return state;
-  }
 };
