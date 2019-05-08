@@ -2,6 +2,7 @@ import React from 'react';
 import storyBuilder from '../../storyBuilder';
 import mockCoords from '../../__test__/mocks/coord-mock.json';
 import mockLocation from '../../__test__/mocks/location-mock.json';
+import AppHeader from '../../components/app_header';
 import HomePage from './HomePage';
 
 export const mockActions = {
@@ -19,15 +20,19 @@ export const mockProps = {
 };
 
 export const renderScene = knobProps => (knobs, props = knobProps) => (
-  <HomePage
-    geoLocating={knobs.boolean('geoLocating', !!props.geoLocating)}
-    geoLocation={knobs.object('geoLocation', props.geoLocation)}
-    geoError={knobs.object('geoError', props.geoError)}
-    fetchingListings={knobs.boolean('fetchingListings', !!props.fetchingListings)}
-    listingsLocation={knobs.object('listingsLocation', props.listingsLocation)}
-    listingsRegions={knobs.object('listingsRegions', props.listingsRegions)}
-    listingsError={knobs.object('listingsError', props.listingsError)}
-  />
+  <React.Fragment>
+    <AppHeader />
+    <HomePage
+      geoLocating={knobs.boolean('geoLocating', !!props.geoLocating)}
+      geoLocation={knobs.object('geoLocation', props.geoLocation)}
+      geoError={knobs.object('geoError', props.geoError)}
+      fetchingListings={knobs.boolean('fetchingListings', !!props.fetchingListings)}
+      listingsLocation={knobs.object('listingsLocation', props.listingsLocation)}
+      listingsRegions={knobs.object('listingsRegions', props.listingsRegions)}
+      listingsError={knobs.object('listingsError', props.listingsError)}
+    />
+  </React.Fragment>
+  
 );
 
 export const scenarios = {
