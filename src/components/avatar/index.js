@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import defaultImg from '../../assets/logoSquare.png';
 
 const ImgWrapper = styled.div`
   img {
@@ -23,7 +24,7 @@ Avatar.propTypes = {
 };
 
 Avatar.defaultProps = {
-  img: "",
+  img: defaultImg,
   width: "70px",
   height: "70px"
 };
