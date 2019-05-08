@@ -17,6 +17,16 @@ export const CardWrapper = styled.div`
   animation: fadein .5s;
 `;
 
+export const TopRight = styled.div`
+  text-align: right;
+  a {
+    color: ${palette.gray4};
+  }
+  a:hover {
+    color: ${palette.teal};
+  }
+`
+
 export const FlexWrapper = styled.div`
   display: flex;
   align-items: center;

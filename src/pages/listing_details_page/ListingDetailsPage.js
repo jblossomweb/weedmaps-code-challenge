@@ -4,6 +4,7 @@ import pick from 'lodash.pick';
 import get from 'lodash.get';
 
 import ListingDetails from '../../components/listing_details';
+import LoadingBars from '../../components/loading_bars';
 
 import {
   Wrapper,
@@ -12,10 +13,14 @@ import {
 
 class ListingDetailsPage extends Component {
   render() {
-    const { listing } = this.props;
+    const { listing, listingsError, fetchingListings } = this.props;
+    const error = listingsError;
+    const loading = fetchingListings;
     return (
       <Wrapper>
+        {loading && <LoadingBars />}
         <Content>
+          {error && <div data-tag={`error`}>{error.message}</div>}
           {listing && (
             <ListingDetails
               {...pick(
@@ -68,11 +73,15 @@ class ListingDetailsPage extends Component {
 ListingDetailsPage.propTypes = {
   listingId: PropTypes.number,
   listing: PropTypes.object,
+  fetchingListings: PropTypes.bool,
+  listingsError: PropTypes.object,
 };
 
 ListingDetailsPage.defaultProps = {
   listingId: null,
   listing: null,
+  fetchingListings: false,
+  listingsError: null,
 };
 
 export default ListingDetailsPage;

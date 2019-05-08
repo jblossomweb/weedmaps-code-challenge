@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import parseHtml from 'react-html-parser';
+import { Link } from 'react-router-dom';
 import pick from 'lodash.pick';
 import palette from '../../constants/palette';
 
@@ -14,6 +15,7 @@ import ListingAmenities from '../listing_amenities';
 import {
   Wrapper,
   CardWrapper,
+  TopRight,
   FlexWrapper,
   AvatarWrapper,
   TextColumn,
@@ -27,6 +29,11 @@ import {
 const ListingDetails = props => (
   <Wrapper>
     <CardWrapper>
+      <TopRight>
+        <Link to={`/home`}>
+          <span role="img" aria-label="home">🏠</span> Back to Listings
+        </Link>
+      </TopRight>
       <FlexWrapper>
         <AvatarWrapper>
           <Avatar img={props.img} />
@@ -47,7 +54,7 @@ const ListingDetails = props => (
             {props.zip_code}
           </LocationRow>
           <LocationRow>
-            {props.license_type} 
+            {props.license_type}
           </LocationRow>
         </TextColumn>
       </FlexWrapper>

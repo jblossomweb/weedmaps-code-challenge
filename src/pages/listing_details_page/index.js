@@ -18,6 +18,8 @@ export class Container extends ListingDetailsPage {
 export const mapStateToProps = (state, { match }) => ({
   listingId: Number(match.params.id.split('-')[0]),
   listing: listingsSelectors.getListingDetails(state, match.params.id),
+  fetchingListings: listingsSelectors.getFetching(state),
+  listingsError: listingsSelectors.getError(state),
 });
 
 export const mapDispatchToProps = services => dispatch => ({

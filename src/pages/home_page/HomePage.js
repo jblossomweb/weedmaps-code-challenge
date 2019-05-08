@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import HeroSection from '../../components/hero_section';
 import Listings from '../../components/listings';
+import LoadingBars from '../../components/loading_bars';
 
 import {
   Wrapper,
@@ -16,6 +17,7 @@ class HomePage extends React.Component {
       fetchingListings, listingsLocation, listingsRegions, listingsError,
     } = this.props;
     const error = geoError || listingsError;
+    const loading = geoLocating || fetchingListings;
     return (
       <Wrapper>
         <HeroSection
@@ -27,7 +29,8 @@ class HomePage extends React.Component {
         />
         <Content>
           {error && <div data-tag={`error`}>{error.message}</div>}
-          {listingsLocation && listingsRegions && (
+          {loading && <LoadingBars />}
+          {!loading && listingsLocation && listingsRegions && (
             <Listings
               location={listingsLocation}
               regions={listingsRegions}

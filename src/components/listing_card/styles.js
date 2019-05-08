@@ -5,6 +5,16 @@ export const Wrapper = styled.div`
   a {
     text-decoration: none;
   }
+  a > div {
+    border: 1px solid transparent;
+  }
+  a:hover > div {
+    transition: all .2s ease-in-out;
+    &:hover {
+      transform: scale(1.025);
+      border: 1px solid ${palette.teal};
+    }
+  }
 `;
 
 export const CardWrapper = styled.div`

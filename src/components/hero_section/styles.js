@@ -42,6 +42,7 @@ export const LocateButton = styled.a`
   align-items: center;
   justify-content: start;
   border: 1px solid ${props => props.disabled ? palette.gray3 : palette.gray4};
+  background: ${props => props.disabled ? palette.gray1 : palette.white};
   color: ${props => props.disabled ? palette.gray3 : palette.gray4};
   border-radius: 3px;
   padding: 5px;
@@ -49,6 +50,11 @@ export const LocateButton = styled.a`
   font-weight: bold;
   cursor: ${props => props.disabled ? 'wait' : 'pointer'};
   text-transform: uppercase;
+  transition: all .1s ease-in-out;
+  &:hover {
+    background: ${props => props.disabled ? palette.gray1 : palette.teal};
+    color: ${props => props.disabled ? palette.gray3 : palette.white};
+  }
 
   svg {
     margin-right: 10px;

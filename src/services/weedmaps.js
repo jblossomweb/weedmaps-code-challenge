@@ -37,7 +37,7 @@ export class WeedmapsService {
     const endpoint = `listings/${id}`
     const url = `${this.apiUrl}${endpoint}`
     return promiseGet({ url, headers }, this.rest)
-      .then(delay(100)) // useful throttle
+      .then(delay(500)) // useful throttle
   }
 }
 
