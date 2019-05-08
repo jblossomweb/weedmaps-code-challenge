@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import geoService from '../../services/geolocation';
 import * as geoSelectors from '../../store/selectors/geo';
 import * as geoThunks from '../../store/thunks/geo';
+import weedmapsService from '../../services/weedmaps';
 import * as listingsSelectors from '../../store/selectors/listings';
 import * as listingsThunks from '../../store/thunks/listings';
 
 import HomePage from './HomePage';
 
-class Container extends HomePage {
+export class Container extends HomePage {
   componentWillReceiveProps(nextProps) {
     if (nextProps.geoLocating || nextProps.fetchingListings) {
       return;
@@ -45,9 +47,19 @@ export const mapStateToProps = state => ({
   listingsError: listingsSelectors.getError(state),
 });
 
-export const mapDispatchToProps = dispatch => ({
-  geoLocate: () => geoThunks.fetchCoordinates()(dispatch),
-  fetchListings: coords => listingsThunks.fetchListings(coords)(dispatch),
+export const mapDispatchToProps = services => dispatch => ({
+  geoLocate: () => geoThunks.fetchCoordinates(
+    services.geoService,
+  )(dispatch),
+  fetchListings: coords => listingsThunks.fetchListings(
+    coords,
+    services.weedmapsService,
+  )(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+const connectServices = services => connect(
+  mapStateToProps,
+  mapDispatchToProps(services),
+)(Container);
+
+export default connectServices({ geoService, weedmapsService });

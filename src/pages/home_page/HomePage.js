@@ -17,26 +17,24 @@ class HomePage extends React.Component {
     } = this.props;
     const error = geoError || listingsError;
     return (
-      <React.Fragment>
-        <Wrapper>
-          <HeroSection
-            geoLocate={geoLocate}
-            geoLocating={geoLocating}
-            geoLocation={geoLocation}
-            fetchingListings={fetchingListings}
-            listingsLocation={listingsLocation}
-          />
-          <Content>
-            {error && <div> {error.message} </div>}
-            {listingsLocation && listingsRegions && (
-              <Listings
-                location={listingsLocation}
-                regions={listingsRegions}
-              />
-            ) }
-          </Content>
-        </Wrapper>
-      </React.Fragment>
+      <Wrapper>
+        <HeroSection
+          geoLocate={geoLocate}
+          geoLocating={geoLocating}
+          geoLocation={geoLocation}
+          fetchingListings={fetchingListings}
+          listingsLocation={listingsLocation}
+        />
+        <Content>
+          {error && <div data-tag={`error`}>{error.message}</div>}
+          {listingsLocation && listingsRegions && (
+            <Listings
+              location={listingsLocation}
+              regions={listingsRegions}
+            />
+          ) }
+        </Content>
+      </Wrapper>
     );
   }
 }

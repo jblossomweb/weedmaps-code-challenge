@@ -14,6 +14,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
+      "!src/__test__/*.{js,jsx,ts,tsx}",
       "!src/**/*.story.{js,jsx,ts,tsx}",
       "!src/**/*.test.{js,jsx,ts,tsx}",
       "!src/**/*styles.{js,jsx,ts,tsx,css,scss}",

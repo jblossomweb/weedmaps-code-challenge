@@ -66,7 +66,7 @@ class ListingDetailsPage extends Component {
 };
 
 ListingDetailsPage.propTypes = {
-  listingId: PropTypes.number.isRequired,
+  listingId: PropTypes.number,
   listing: PropTypes.object,
 };
 

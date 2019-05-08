@@ -3,7 +3,7 @@ import mockListingDetailsResponse from '../__test__/mocks/listing-mock.json';
 import * as utils from './utils';
 import { WeedmapsService } from './weedmaps';
 
-const mockApiHost = 'absolutely.nowhere.com';
+const mockApiHost = 'fake.url';
 const mockRest = {
   get: jest.fn(),
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import storyBuilder from '../../storyBuilder';
 import mockCoords from '../../__test__/mocks/coord-mock.json';
 import mockLocation from '../../__test__/mocks/location-mock.json';
+import mockError from '../../__test__/mocks/error-mock.json';
 import AppHeader from '../../components/app_header';
 import HomePage from './HomePage';
 
@@ -23,6 +24,7 @@ export const renderScene = knobProps => (knobs, props = knobProps) => (
   <React.Fragment>
     <AppHeader />
     <HomePage
+      {...mockActions}
       geoLocating={knobs.boolean('geoLocating', !!props.geoLocating)}
       geoLocation={knobs.object('geoLocation', props.geoLocation)}
       geoError={knobs.object('geoError', props.geoError)}
@@ -45,6 +47,11 @@ export const scenarios = {
     ...mockActions,
     geoLocating: true,
   }),
+  'geoError': renderScene({
+    ...HomePage.defaultProps,
+    ...mockActions,
+    geoError: mockError,
+  }),
   'geoLocation': renderScene({
     ...HomePage.defaultProps,
     ...mockActions,
@@ -55,6 +62,11 @@ export const scenarios = {
     ...mockActions,
     geoLocation: mockProps.geoLocation,
     fetchingListings: true,
+  }),
+  'listingsError': renderScene({
+    ...HomePage.defaultProps,
+    ...mockActions,
+    listingsError: mockError,
   }),
   'location': renderScene({
     ...HomePage.defaultProps,

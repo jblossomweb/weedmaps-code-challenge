@@ -1,5 +1,3 @@
-import weedmapsService from '../../services/weedmaps';
-
 import {
   requestListingsAction,
   receiveListingsAction,
@@ -9,7 +7,7 @@ import {
   requestListingDetailsErrorAction,
 } from '../actions/listings';
 
-export const fetchListings = (coords, service = weedmapsService) => dispatch => {
+export const fetchListings = (coords, service) => dispatch => {
   dispatch(requestListingsAction());
   service.getListingsByLocation(coords).then(
     response => dispatch(receiveListingsAction(response)),
@@ -17,7 +15,7 @@ export const fetchListings = (coords, service = weedmapsService) => dispatch => 
   )
 }
 
-export const fetchListingDetails = (id, service = weedmapsService) => dispatch => {
+export const fetchListingDetails = (id, service) => dispatch => {
   dispatch(requestListingDetailsAction());
   service.getListingById(id).then(
     response => dispatch(receiveListingDetailsAction(response)),

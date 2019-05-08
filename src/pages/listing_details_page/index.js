@@ -1,26 +1,35 @@
 import { connect } from 'react-redux';
 
+import weedmapsService from '../../services/weedmaps';
 import * as listingsSelectors from '../../store/selectors/listings';
 import * as listingsThunks from '../../store/thunks/listings';
 
 import ListingDetailsPage from './ListingDetailsPage';
 
-class Container extends ListingDetailsPage {
+export class Container extends ListingDetailsPage {
   componentWillMount() {
-    const { listingId, listing, fetchListingDetails } = this.props
+    const { listingId, listing, fetchListingDetails } = this.props;
     if (listingId && !listing) {
       fetchListingDetails(listingId);
     }
   }
 }
 
-const mapStateToProps = (state, { match }) => ({
+export const mapStateToProps = (state, { match }) => ({
   listingId: Number(match.params.id.split('-')[0]),
   listing: listingsSelectors.getListingDetails(state, match.params.id),
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchListingDetails: listingId => listingsThunks.fetchListingDetails(listingId)(dispatch),
+export const mapDispatchToProps = services => dispatch => ({
+  fetchListingDetails: listingId => listingsThunks.fetchListingDetails(
+    listingId,
+    services.weedmapsService,
+  )(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+const connectServices = services => connect(
+  mapStateToProps,
+  mapDispatchToProps(services),
+)(Container);
+
+export default connectServices({ weedmapsService });
