@@ -31,9 +31,15 @@ class HeroSection extends React.Component {
   }
 
   getSubTitle = () => {
-    const { listingsLocation } = this.props;
+    const { geoLocation, listingsLocation } = this.props;
     if (listingsLocation) {
       return listingsLocation.quote || '';
+    }
+    if (geoLocation) {
+      const { latitude, longitude } = geoLocation;
+      const latitudeText = Math.sign(Number(latitude) || 0) > -1 ? 'north' : 'south';
+      const longitudeText = Math.sign(Number(longitude) || 0) > -1 ? 'east' : 'west';
+      return `${Math.abs(latitude)}° ${latitudeText}, ${Math.abs(longitude)}° ${longitudeText}`;
     }
     return `Click the 'Locate Me' button above.`;
   }
