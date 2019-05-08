@@ -8,13 +8,20 @@ export const mockProps = {
   regions: mockLocation.data.regions,
 };
 
+export const renderScene = knobProps => (knobs, props = knobProps) => (
+  <Listings
+    location={knobs.object('location', props.location)}
+    regions={knobs.object('regions', props.regions)}
+  />
+);
+
 export const scenarios = {
-  'default': (knobs, props = mockProps) => (
-    <Listings
-      location={knobs.object('location', props.location)}
-      regions={knobs.object('regions', props.regions)}
-    />
-  ),
+  'default': renderScene({
+    ...Listings.defaultProps,
+  }),
+  'listings': renderScene({
+    ...mockProps,
+  }),
 };
 
 storyBuilder(scenarios, 'components/listings');
