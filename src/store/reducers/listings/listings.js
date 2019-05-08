@@ -52,7 +52,9 @@ export const receiveWeedmapsListingDetailsReducer = (state, action) => {
   const newState = clone(state);
   set(newState, listingsPaths.fetching(), false);
   if (listing && listing.wmid) {
-    set(newState, listingsPaths.details(listing.wmid), listing);
+    const detailsKey = `${listing.wmid}-${listing.slug}`;
+    const detailsPath = listingsPaths.details(detailsKey);
+    set(newState, detailsPath, listing);
     set(newState, listingsPaths.error(), null);
   } else {
     set(newState, listingsPaths.error(), new Error('payload does not contain a valid listing'));

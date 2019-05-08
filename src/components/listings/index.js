@@ -55,7 +55,17 @@ class Listings extends React.Component {
               )}
             </h2>
             {get(regions[regionType], 'listings').map(listing => (
-              <ListingCard location={location} listing={listing} key={listing.id} />
+              <ListingCard
+                key={listing.id}
+                wmid={listing.wmid}
+                slug={listing.slug}
+                name={listing.name}
+                img={get(listing, ['avatar_image', 'small_url'], undefined)}
+                city={listing.city}
+                state={listing.state || location.state_abv} // sometimes empty
+                distance={listing.distance}
+                rating={listing.rating}
+              />
             ))}
           </ListingGroups>
         ))}

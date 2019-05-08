@@ -98,8 +98,9 @@ describe('store/reducers/listings', () => {
       expect(get(newState, path)).toEqual(false);
     });
     it('should set details to action payload listing', () => {
-      const { wmid } = testAction.payload.listing;
-      const path = listingsPaths.details(wmid);
+      const { wmid, slug } = testAction.payload.listing;
+      const detailsKey = `${wmid}-${slug}`;
+      const path = listingsPaths.details(detailsKey);
       const testState = getInitialState();
       expect(get(testState, path)).toBe(undefined);
       const newState = reducers.receiveWeedmapsListingDetailsReducer(testState, testAction);

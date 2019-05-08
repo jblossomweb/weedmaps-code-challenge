@@ -1,24 +1,24 @@
 import React from 'react';
-import get from 'lodash.get';
-import palette from '../../../constants/palette';
+import PropTypes from 'prop-types';
+import palette from '../../constants/palette';
 
-import Accessible from '../../../icons/accessible';
-import Atm from '../../../icons/atm';
-import CreditCard from '../../../icons/credit-card';
-import Delivery from '../../../icons/delivery';
-import SolidLock from '../../../icons/solid-lock';
-import Photo from '../../../icons/photo';
-import VerifiedSeller from '../../../icons/verified-seller';
+import Accessible from '../../icons/accessible';
+import Atm from '../../icons/atm';
+import CreditCard from '../../icons/credit-card';
+import Delivery from '../../icons/delivery';
+import SolidLock from '../../icons/solid-lock';
+import Photo from '../../icons/photo';
+import VerifiedSeller from '../../icons/verified-seller';
 
 import {
   LocationRow,
   BodyWrapper,
   BodyBlock,
-} from '../styles';
+} from './styles';
 
-const Amenities = ({ listing }) => (
+const ListingAmenities = props => (
   <BodyWrapper>
-    {listing.is_verified_seller && (
+    {props.is_verified_seller && (
       <BodyBlock>
         <LocationRow>
           <VerifiedSeller width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -26,7 +26,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {get(listing, ['online_ordering', 'enabled_for_delivery'], false) && (
+    {props.enabled_for_delivery && (
       <BodyBlock>
         <LocationRow>
           <Delivery width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -34,7 +34,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.has_handicap_access && (
+    {props.has_handicap_access && (
       <BodyBlock>
         <LocationRow>
           <Accessible width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -42,7 +42,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.accepts_credit_cards && (
+    {props.accepts_credit_cards && (
       <BodyBlock>
         <LocationRow>
           <CreditCard width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -50,7 +50,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.has_atm && (
+    {props.has_atm && (
       <BodyBlock>
         <LocationRow>
           <Atm width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -58,7 +58,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.has_security_guard && (
+    {props.has_security_guard && (
       <BodyBlock>
         <LocationRow>
           <SolidLock width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -66,7 +66,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.has_photos && (
+    {props.has_photos && (
       <BodyBlock>
         <LocationRow>
           <Photo width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -74,7 +74,7 @@ const Amenities = ({ listing }) => (
         </LocationRow>
       </BodyBlock>
     )}
-    {listing.has_videos && (
+    {props.has_videos && (
       <BodyBlock>
         <LocationRow>
           <Photo width={`${25}px`} height={`${25}px`} fill={palette.gray4} /><br/>
@@ -85,4 +85,26 @@ const Amenities = ({ listing }) => (
   </BodyWrapper>
 );
 
-export default Amenities;
+ListingAmenities.propTypes = {
+  is_verified_seller: PropTypes.bool,
+  enabled_for_delivery: PropTypes.bool,
+  has_handicap_access: PropTypes.bool,
+  accepts_credit_cards: PropTypes.bool,
+  has_atm: PropTypes.bool,
+  has_security_guard: PropTypes.bool,
+  has_photos: PropTypes.bool,
+  has_videos: PropTypes.bool,
+};
+
+ListingAmenities.defaultProps = {
+  is_verified_seller: false,
+  enabled_for_delivery: false,
+  has_handicap_access: false,
+  accepts_credit_cards: false,
+  has_atm: false,
+  has_security_guard: false,
+  has_photos: false,
+  has_videos: false,
+};
+
+export default ListingAmenities;

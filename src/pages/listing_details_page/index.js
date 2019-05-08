@@ -15,7 +15,7 @@ class Container extends ListingDetailsPage {
 }
 
 const mapStateToProps = (state, { match }) => ({
-  listingId: Number(match.params.id),
+  listingId: Number(match.params.id.split('-')[0]),
   listing: listingsSelectors.getListingDetails(state, match.params.id),
 });
 
