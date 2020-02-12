@@ -1,5 +1,10 @@
 # Weedmaps Frontend Code Challenge
 
+## Demo
+
+There is a demo hosted here:
+[https://weedmaps-code-challenge.firebaseapp.com/](https://weedmaps-code-challenge.firebaseapp.com/)
+
 ###### Table of Contents
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
