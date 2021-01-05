@@ -38,7 +38,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
     "lodash.clonedeep": "^4.5.0",
